@@ -1,0 +1,54 @@
+.slide_1 h1{
+    color:rgba(255, 255, 255, 0.9);
+}
+.slides p{
+    color:rgb(209, 134, 134);
+}
+.slide_2{
+    background: url("img/back.png");
+    h5{
+    color: black;
+    }
+}
+.slide_9{
+    position: relative;
+    left: -267px;
+    
+    .enot_2{
+        position: absolute;
+        left: 941px;
+        top: 207px;
+        border:none;
+    }
+    .equals{
+        border:none;
+    }
+    h3{
+        position: absolute;
+        top: 11%;
+        left: 88%;
+        width: 725.5px;
+        font-size: 1em;
+    }
+}
+.slide_10{
+    .hash{
+        height: 600px;
+    }
+}
+.slide_12 .fragm{
+    font-size: 22px;
+}
+.slide_14{
+    h3{
+        margin-top:10%;
+    }
+}
+.conclusion
+{
+    border:none;
+     img{
+    width:30%;
+    border:none;
+    }
+}

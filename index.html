@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+		<link rel="stylesheet" href="style.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="slide_1"><h1>blockchain</h1></section>
+				<section class="slide_2"><h5>Blockchain from the inside: how Bitcoin works<br>
+					We figure it out once and for all</h5></section>
+				<section class="slide_3"><h3>What it is?</h3><p>A list that cannot be changed.<br>
+					Blockchain - a chain of blocks or, in other words, a linked list.</p>
+					<aside class="notes">
+						Blockchain - a chain of blocks or other words in a linked list. This list has the following entry. Like the tags of a train, each drags the next.
+
+					</aside>
+				</section>
+				<section class="slide_4">
+					<img src="img/71i.png">
+					<aside class="notes">
+						<p>Oleg’s friends constantly borrow money from him. Oleg is kind, but extremely forgetful. A week later, he no longer remembers who did not repay his debt, but he is embarrassed to ask everyone about it. Therefore, once he decided to put an end to this by making a list of friends on his board at home with whom he borrowed money. Now Oleg can always go to the board and make sure that Max has returned everything, but Vanya does not give 700 rubles already.
+								Trusting his list, Oleg forgets about debt and loses 700 rubles. He decides to fight it somehow.</p>
+					</aside>
+				</section>
+				<section class="slide_5"><h3>How it works?</h3></section>
+				<section>
+					<h3>Hashing</h3>
+					<img src="img/71j.png">
+					<aside class="notes"><p>Last year, Oleg went to programming courses, where he was told about hashing. He remembers that any string can be turned into a unique set of characters - a hash, and changing any character in a string will completely change it.</p></aside>
+				</section>
+				<section class="slide_6">
+						<h3>SHA-256 hash</h3>
+						<img src="img/71k.png">
+						<aside class="notes"><p>Adding a dot at the end changed the final hash beyond recognition - this can be used.
+
+								Oleg takes the well-known SHA-256 hash and hashes every record with it, adding the result at the end. Now Oleg can make sure that no one has changed his notes by hashing them again and comparing them with the green one.
+								</p></aside>
+					</section>
+				<section class="slide_7">
+						<h3>Hash + Hash of the last point</h3>
+						<img src="img/71l.png">
+						<aside class="notes"><p>But EVIL RUSSIAN IVAN is also capable of SHA-256 and can easily change the record along with its hash. Especially if the hash is written right next to the board.
+
+								Therefore, for greater security, Oleg decides not to hash the record itself, but add it along with the hash from the previous record. Now all of the following entries are dependent on previous ones. If you change at least one line, you will have to recalculate the hashes of all the others below the list.
+								
+								</p></aside>
+					</section>
+				<section class="slide_8">
+						<h3></h3>
+						<img src="img/enot.png">
+						<aside class="notes"><p>But one day, Ivan sneaks into the night, changes the record he needs and updates the hashes for the entire list to the end. It takes him several hours, but Oleg is still sound asleep and cannot hear. In the morning, Oleg discovers an absolutely correct list - all hashes match. But Ivan still deceived him, although he spent a sleepless night on it. How else can you protect yourself from Night Ivan?
+								
+								</p></aside>
+				</section>
+				<section class="slide_9">
+					
+						<section>
+								<aside class="notes"><p>Oleg decides to complicate his life somehow. Now, to add a new record to the list, Oleg will solve a complex problem connected with it, for example, a mathematical equation. He will add the answer to the final hash.
+
+										Oleg is good at mathematics, but even it takes him ten minutes to add a record. Despite this, the time spent is worth it, because if Ivan wants to change something again, he will have to re-solve the equations for each line, and there may be dozens of them. It will take a lot of time, because the equations are each time unique and associated with a particular record.
+										
+										But checking the list is just as simple: first you need to compare the hashes as before, and then check the solutions of the equations by simple substitution. If everything converges - the list is not changed.<br>In reality, things are not so good with equations: computers solve them too well, and where to store so many unique equations. Therefore, the authors of the blockchain came up with a more beautiful task: you need to find such a number (nonce) that the final hash of the entire record starts at 10 zeros. Such a nonce is difficult to find, but the result can always be checked simply with your eyes.
+										
+										
+										</p></aside>
+							<section><img src="img/differencialnye-uravneniya.jpg" class="equals"></section>
+							<section>
+								<img src="img/i.jpg" class="enot_2">
+								<h3>attacker Ivan shocked</h3>
+							</section>
+						</section>
+					</section>
+					<section class="slide_10">
+							<h3></h3>
+							<img src="img/728.png" class="hash">
+							<aside class="notes"><p>Now Oleg checks all the hashes and additionally makes sure that each starts on the agreed number of zeros. The cunning Ivan, even armed with a powerful laptop, will not have time to count all the hashes overnight so that they satisfy the condition - there will not be enough time.
+
+									Such a list is essentially a home blockchain. Its security is guaranteed by mathematicians who have proven that these hashes cannot be calculated any faster than brute force. This sorting of hashes for each record is mining
+									
+									</p></aside>
+					</section>
+					<section class="slide_11">
+						<section>
+							<h3>Example on bitcoin</h3>
+							<aside class="notes"><p>Since the entire blockchain is a book, individual blocks can be represented as pages on which transactions are "recorded". Each block "refers" to the previous one and so on until the very first block (genesis block). This is what creates such an interesting feature of the blockchain as immutability. You cannot take and change block # 123 so that no one will notice. Because the blockchain is designed in such a way that it will entail a change in block # 124, then # 125, and so on, to the very top.
+
+									
+									</p></aside>
+						</section>
+						<section><h3>Structure</h3>
+							<aside class="notes"><p>With the usual hand movement, we open the protocol specification and look at the structure of the block.
+									
+								</p></aside></section>
+						<section class="slide_12">
+								<section>
+										<img src="img/struct.png" class="struct">
+										<aside class="notes"><p>With the usual hand movement, we open the protocol specification and look at the structure of the block.
+										<br>The first six parameters (all except txn_count and txns) form the header of the block. It is the header hash that is called the block hash, that is, the transactions themselves do not directly participate in the hashing.
+
+										Instead, they are recorded in a special structure - the Merkle tree.
+											</p></aside>
+								</section>
+								<section class="fragm">
+										<p class="fragment" data-fragment-index="2">version — block version</p>
+										<p class="fragment" data-fragment-index="1">prev_block — parent or prev block hash</p>
+										<p class="fragment" data-fragment-index="3">merkle_root —if missed, than hash of all transaction in block</p>
+										<p class="fragment" data-fragment-index="4">timestamp — data and time of changin block</p>
+										<p class="fragment" data-fragment-index="5">xn_count, txns — число транзакций в блоке и их список</p>
+								</section>
+								
+							
+						</section>
+					</section>
+				<section class="slide_13"><img src="img/work.png" class="blockchain__work"></section>
+				<section class="slide_14"><h3>Conclusion</h3>
+					<section class="conclusion">
+						<img src="img/index.jpg" class="fragment"  style="border:none;" data-fragment-index="1">
+						<img src="img/oblozhka-1.jpg" class="fragment" style="border:none;" data-fragment-index="2">
+						<img src="img/Интеллектуальная-собственность-1024x476.jpg" style="border:none; height: 190px;" class="fragment" data-fragment-index="3">
+					<aside class="notes"><p>Blockchain is the technology on which Bitcoin is built. But there are, perhaps, dozens of other ways to use the blockchain in isolation from cryptocurrencies.Blockchain is not a strictly defined set of algorithms. This is a structure for building a fake network between participants, where no one can trust anyone.</p></aside>
+					</section>
+				</section>
+				<section class="slide_14"><h3>Thanks for attention :)</h3>
+					<p>Sources:</p>
+				<p>https://vas3k.ru/blog/blockchain/</p><br>
+				<p>https://habr.com/ru/post/320176/</p>
+				</section>
+				</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
